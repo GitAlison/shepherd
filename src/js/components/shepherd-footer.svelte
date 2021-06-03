@@ -1,10 +1,24 @@
 <script>
   import ShepherdButton from './shepherd-button.svelte';
+  import ShepherdProgress from './shepherd-progress.svelte';
 
-  export let step;
+  export let step, tour;
 
   $: buttons = step.options.buttons;
+
 </script>
+
+<footer class="shepherd-footer">
+  {#if tour.options.defaultStepOptions.showProgress}
+    <ShepherdProgress {tour} />
+  {/if}
+
+  {#if buttons}
+    {#each buttons as config}
+      <ShepherdButton {config} {step} />
+    {/each}
+  {/if}
+</footer>
 
 <style global>
   .shepherd-footer {
@@ -18,15 +32,5 @@
   .shepherd-footer .shepherd-button:last-child {
     margin-right: 0;
   }
-</style>
 
-<footer class="shepherd-footer">
-    {#if buttons}
-        {#each buttons as config}
-          <ShepherdButton
-            {config}
-            {step}
-          />
-        {/each}
-    {/if}
-</footer>
+</style>

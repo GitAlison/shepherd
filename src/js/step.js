@@ -262,6 +262,7 @@ export class Step extends Evented {
         descriptionId,
         labelId,
         step: this,
+        tour: this.tour,
         styles: this.styles
       }
     });

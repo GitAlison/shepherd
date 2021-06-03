@@ -4,8 +4,23 @@
   import ShepherdText from './shepherd-text.svelte';
   import { isUndefined } from '../utils/type-check.js';
 
-  export let descriptionId, labelId, step;
+  export let descriptionId, labelId, step, tour;
+
 </script>
+
+<div class="shepherd-content">
+  {#if !isUndefined(step.options.title) || (step.options.cancelIcon && step.options.cancelIcon.enabled)}
+    <ShepherdHeader {labelId} {step} />
+  {/if}
+
+  {#if !isUndefined(step.options.text)}
+    <ShepherdText {descriptionId} {step} />
+  {/if}
+
+  {#if Array.isArray(step.options.buttons) && step.options.buttons.length}
+    <ShepherdFooter {step} {tour} />
+  {/if}
+</div>
 
 <style global>
   .shepherd-content {
@@ -13,28 +28,5 @@
     outline: none;
     padding: 0;
   }
+
 </style>
-
-<div
-  class="shepherd-content"
->
-  {#if !isUndefined(step.options.title) || (step.options.cancelIcon && step.options.cancelIcon.enabled)}
-    <ShepherdHeader
-      {labelId}
-      {step}
-    />
-  {/if}
-
-  {#if !isUndefined(step.options.text)}
-    <ShepherdText
-      {descriptionId}
-      {step}
-    />
-  {/if}
-
-  {#if Array.isArray(step.options.buttons) && step.options.buttons.length}
-    <ShepherdFooter
-      {step}
-    />
-  {/if}
-</div>

@@ -14,6 +14,7 @@
         cancelIcon: {
           enabled: true
         },
+        showProgress: true,
         classes: 'class-1 class-2',
         scrollTo: {
           behavior: 'smooth',
